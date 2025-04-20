@@ -1,0 +1,47 @@
+[project]
+name = "qt-material"
+version = "2.14"
+description = "Material inspired stylesheet for PySide6 and PyQt6."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    {name="Yeison Cardona", email="yencardonaal@unal.edu.co"},
+    {name=" Michael Cummings", email="mgcummings@yahoo.com"}
+]
+maintainers = [
+    {name=" Michael Cummings", email="mgcummings@yahoo.com"}
+]
+license ="BSD-2-Clause"
+license-files = ["LICENSE"]
+classifiers = [
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.12'
+]
+dependencies = [
+    "jinja2>=3.1.6",
+]
+
+[project.optional-dependencies]
+pyqt = [
+    "pyqt6>=6.9.0",
+]
+pyside = [
+    "pyside6>=6.9.0",
+]
+[built-system]
+requires = ["uv"]
+build-backend = "uv"
+
+dependencies = [
+    "jinja2>=3.1.6",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.6",
+]
+[urls]
+Homepage = "https://github.com/Dragonrun1/qt-material"
+Repository = "https://github.com/Dragonrun1/qt-material.git"
+Issues = "https://github.com/Dragonrun1/qt-material/issues"
