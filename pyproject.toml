@@ -29,6 +29,12 @@ pyqt = [
 pyside = [
     "pyside6>=6.9.0",
 ]
+docs = [
+    "ipykernel>=5.5.6",
+    "ipython==7.16.3",
+    "nbsphinx>=0.9.7",
+    "pygments>=2.19.1",
+]
 [built-system]
 requires = ["uv"]
 build-backend = "uv"

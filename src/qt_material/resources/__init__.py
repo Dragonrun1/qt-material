@@ -1,1 +1,1 @@
-from .generate import ResourseGenerator, RESOURCES_PATH
+from .generate import RESOURCES_PATH, ResourseGenerator
