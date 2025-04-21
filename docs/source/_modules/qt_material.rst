@@ -20,4 +20,5 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   qt_material.hook-qt_material
+   qt_material.qt_style_tools
+   qt_material.ui_dock_theme

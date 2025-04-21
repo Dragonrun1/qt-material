@@ -1,14 +1,14 @@
 # Qt-Material
 
-This is another stylesheet for **PySide6**, **PySide2**, **PyQt5** and **PyQt6**, which looks like Material Design (close enough).
+This is another stylesheet for **PySide6** and **PyQt6**, which looks like Material Design (close enough).
 
-![GitHub top language](https://img.shields.io/github/languages/top/un-gcpds/qt-material)
+![GitHub top language](https://img.shields.io/github/languages/top/Dragonrun1/qt-material)
 ![PyPI - License](https://img.shields.io/pypi/l/qt-material)
 ![PyPI](https://img.shields.io/pypi/v/qt-material)
 ![PyPI - Status](https://img.shields.io/pypi/status/qt-material)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/qt-material)
-![GitHub last commit](https://img.shields.io/github/last-commit/un-gcpds/qt-material)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/UN-GCPDS/qt-material)
+![GitHub last commit](https://img.shields.io/github/last-commit/Dragonrun1/qt-material)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/Dragonrun1/qt-material)
 [![Documentation Status](https://readthedocs.org/projects/qt-material/badge/?version=latest)](https://qt-material.readthedocs.io/en/latest/?badge=latest)
 
 There is some custom dark themes:
@@ -43,12 +43,12 @@ pip install qt-material
 
 ## Usage
 
+
 ```python
 import sys
 from PySide6 import QtWidgets
-# from PySide2 import QtWidgets
-# from PyQt5 import QtWidgets
-from src.qt_material import apply_stylesheet
+# from PyQt6 import QtWidgets
+from qt_material import apply_stylesheet
 
 # create the application and the main window
 app = QtWidgets.QApplication(sys.argv)
@@ -64,13 +64,14 @@ app.exec_()
 
 ## Themes
 
+
 ```python
-from src.qt_material import list_themes
+from qt_material import list_themes
 
 list_themes()
 ```
 
-    WARNING:root:qt_material must be imported after PySide or PyQt!
+    WARNING:root:qt_material must be imported after PySide6 or PyQt6!
 
 
 
@@ -236,7 +237,7 @@ python main.py --pyside6
 
 ## New themes
 
-Do you have a custom theme? it looks good? create a [pull request](https://github.com/UN-GCPDS/qt-material/pulls) in [themes folder](https://github.com/UN-GCPDS/qt-material/tree/master/qt_material/themes>)  and share it with all users.
+Do you have a custom theme? it looks good? create a [pull request](https://github.com/Dragonrun1/qt-material/pulls) in [themes folder](https://github.com/Dragonrun1/qt-material/tree/main/qt_material/themes>)  and share it with all users.
 
 
 ## Change theme in runtime
@@ -292,39 +293,45 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
 
 ![dock](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/runtime_dock.gif)
 
-A full set of examples are available in the [exmaples directory](https://github.com/UN-GCPDS/qt-material/blob/master/examples/runtime/)
+A full set of examples are available in the [examples directory](https://github.com/Dragonrun1/qt-material/blob/master/examples/runtime/)
 
 ## Export theme
 
 This feature able to use ```qt-material``` themes into ```Qt``` implementations using only local files.
 
+
 ```python
-from src.qt_material import export_theme
+from qt_material import export_theme
 
 extra = {
 
     # Button colors
-    'danger': '#dc3545', 'warning': '#ffc107', 'success': '#17a2b8',
+    'danger': '#dc3545',
+    'warning': '#ffc107',
+    'success': '#17a2b8',
 
     # Font
-    'font_family': 'monoespace', 'font_size': '13px', 'line_height': '13px',
+    'font_family': 'monospace',
+    'font_size': '13px',
+    'line_height': '13px',
 
     # Density Scale
     'density_scale': '0',
 
     # environ
-    'pyside6': True, 'linux': True,
+    'pyside6': True,
+    'linux': True,
 
 }
 
-export_theme(
-    theme='dark_teal.xml',
-    qss='dark_teal.qss',
-    rcc='resources.rcc',
-    output='theme',
-    prefix='icon:/',
-    invert_secondary=False,
-    extra=extra, )
+export_theme(theme='dark_teal.xml', 
+             qss='dark_teal.qss', 
+             rcc='resources.rcc',
+             output='theme', 
+             prefix='icon:/', 
+             invert_secondary=False, 
+             extra=extra,
+            )
 ```
 
 This script will generate both ```dark_teal.qss``` and ```resources.rcc``` and a folder with all theme icons called ```theme```.
@@ -380,7 +387,7 @@ apply_stylesheet(app, 'default', invert_secondary=False, extra=extra)
 
 ### QMenu
 
-`QMenu` has multiple rendering for each Qt backend, and for each operating system. Even can be related with the style, like [fusion](https://doc.qt.io/qt-5/qtquickcontrols2-fusion.html). Then, the `extra` argument also supports`QMenu` parameters to configure this widgest for specific combinations. This options are not affected by **density scale**.
+`QMenu` has multiple rendering for each Qt backend, and for each operating system. Even can be related with the style, like [fusion](https://doc.qt.io/qt-5/qtquickcontrols2-fusion.html). Then, the `extra` argument also supports`QMenu` parameters to configure this widget for specific combinations. This options are not affected by **density scale**.
 
 
 ```python

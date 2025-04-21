@@ -23,7 +23,7 @@ help:
 
 buildapi:
 	rm -f source/_modules/*
-	sphinx-apidoc -fMeET -o source/_modules ../qt_material
+	sphinx-apidoc -fMeET -o source/_modules ../src/qt_material
 	jupyter nbconvert --to rst source/notebooks/readme.ipynb
 	jupyter nbconvert --to markdown source/notebooks/readme.ipynb --output ../../../README.md
 	python fix_readme.py
