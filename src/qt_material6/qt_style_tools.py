@@ -7,7 +7,7 @@ if "PySide6" in sys.modules:
 elif "PyQt6" in sys.modules:
     from PyQt6 import uic
 
-from ..qt_material import (
+from ..qt_material6 import (
     _FEATURE,
     QtCore,
     QtGui,

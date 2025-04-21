@@ -18,7 +18,7 @@ elif "PyQt6" in sys.modules:
     from PyQt6 import QtCore, QtGui, QtWidgets
 else:
     _GUI = False
-    logging.error("qt_material must be imported after PySide6 or PyQt6!")
+    logging.error("qt_material6 must be imported after PySide6 or PyQt6!")
 
 __widget = QtGui.QAction()
 _FEATURE = callable(getattr(__widget, "set_menu", None))
@@ -351,13 +351,13 @@ def set_icons_theme(theme, parent="theme"):
             QtCore.QDir.add_search_path("icon", resources.index)
             # noinspection PyUnresolvedReferences
             QtCore.QDir.add_search_path(
-                "qt_material",
+                "qt_material6",
                 os.path.join(os.path.dirname(__file__), "resources"),
             )
         else:
             QtCore.QDir.addSearchPath("icon", resources.index)
             QtCore.QDir.addSearchPath(
-                "qt_material",
+                "qt_material6",
                 os.path.join(os.path.dirname(__file__), "resources"),
             )
 

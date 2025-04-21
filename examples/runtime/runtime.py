@@ -2,7 +2,7 @@ from PySide6.QtGui import QFontDatabase
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from src.qt_material.qt_style_tools import QtStyleTools
+from src.qt_material6.qt_style_tools import QtStyleTools
 
 
 ########################################################################

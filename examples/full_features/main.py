@@ -27,8 +27,8 @@ elif "--pyqt6" in sys.argv:
     from PyQt6.QtGui import QIcon
     from PyQt6.QtWidgets import QApplication, QFileDialog, QMainWindow
 
-from src.qt_material import apply_stylesheet
-from src.qt_material.qt_style_tools import QtStyleTools
+from src.qt_material6 import apply_stylesheet
+from src.qt_material6.qt_style_tools import QtStyleTools
 
 if hasattr(Qt, "AA_ShareOpenGLContexts"):
     try:
@@ -111,8 +111,8 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
         self.add_menu_density(self.main, self.main.menuDensity)
         self.show_dock_theme(self.main)
 
-        logo = QIcon("qt_material:/logo/logo.svg")
-        logo_frame = QIcon("qt_material:/logo/logo_frame.svg")
+        logo = QIcon("qt_material6:/logo/logo.svg")
+        logo_frame = QIcon("qt_material6:/logo/logo_frame.svg")
 
         try:
             self.main.setWindowIcon(logo)

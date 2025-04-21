@@ -1,6 +1,6 @@
 import os
 
-from src.qt_material import list_themes
+from src.qt_material6 import list_themes
 
 themes = list_themes()
 themes = [t.replace(".xml", "") for t in themes]

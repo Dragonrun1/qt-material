@@ -1,4 +1,4 @@
-from src.qt_material import export_theme
+from src.qt_material6 import export_theme
 
 export_theme(
     theme="dark_teal.xml",

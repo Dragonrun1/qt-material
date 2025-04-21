@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
-from src.qt_material import apply_stylesheet
+from PySide6.QtWidgets import QApplication, QMainWindow
 
+from src.qt_material6 import apply_stylesheet
 
 extra = {
     # Button colors
