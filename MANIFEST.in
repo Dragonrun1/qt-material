@@ -1,11 +1,9 @@
-recursive-include qt_material *.css.template
-recursive-include qt_material *.ui
-recursive-include qt_material/themes *.xml
-recursive-include qt_material/fonts/roboto *.ttf
-recursive-include qt_material/resources/ *
-recursive-include qt_material/resources/source *
-recursive-include * *.csv
-recursive-include * *.ttf
+recursive-include src/qt_material *.css.template
+recursive-include src/qt_material *.ui
+recursive-include src/qt_material LICENSE
+recursive-include src/qt_material/themes *.xml
+recursive-include src/qt_material/fonts/ *.ttf
+recursive-include src/qt_material/resources/ *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
-
+recursive-exclude examples/ *
