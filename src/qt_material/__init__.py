@@ -6,40 +6,30 @@ from pathlib import Path
 from xml.dom.minidom import parse
 
 import jinja2
+from qt_style_tools import QtStyleTools
 from resources import ResourseGenerator
 
-GUI = True
+_GUI = True
 
 if "PySide6" in sys.modules:
-    from PySide6.QtCore import QDir
-    from PySide6.QtGui import (
-        QAction,
-        QColor,
-        QFontDatabase,
-        QGuiApplication,
-        QPalette,
-    )
+    from PySide6 import QtCore, QtGui, QtWidgets
 
 elif "PyQt6" in sys.modules:
-    from PyQt6.QtCore import QDir
-    from PyQt6.QtGui import (
-        QAction,
-        QColor,
-        QFontDatabase,
-        QGuiApplication,
-        QPalette,
-    )
+    from PyQt6 import QtCore, QtGui, QtWidgets
 else:
-    GUI = False
-    logging.warning("qt_material must be imported after PySide6 or PyQt6!")
+    _GUI = False
+    logging.error("qt_material must be imported after PySide6 or PyQt6!")
 
-__widget = QAction()
-FEATURE = callable(getattr(__widget, "set_menu", None))
+__widget = QtGui.QAction()
+_FEATURE = callable(getattr(__widget, "set_menu", None))
 del __widget
 
-TEMPLATE_FILE = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "material.css.template"
+TEMPLATE_FILE = (
+    Path(__file__).absolute().parent.joinpath("material.css.template")
 )
+# TEMPLATE_FILE = os.path.join(
+#     os.path.dirname(os.path.abspath(__file__)), "material.css.template"
+# )
 
 
 def export_theme(
@@ -52,6 +42,15 @@ def export_theme(
     prefix="icon:/",
 ):
     """"""
+    logging.info("Welcome to 'export_theme' function, adventurer!")
+    logging.debug("Was given the follow argument values:")
+    logging.debug(f"{theme=}")
+    logging.debug(f"{qss=}")
+    logging.debug(f"{rcc=}")
+    logging.debug(f"{invert_secondary=}")
+    logging.debug(f"{extra=}")
+    logging.debug(f"{output=}")
+    logging.debug(f"{prefix=}")
     if extra is None:
         extra = {}
     if not os.path.isabs(output) and not output.startswith("."):
@@ -138,23 +137,23 @@ def build_stylesheet(
 
     theme.update(extra)
 
-    if GUI:
-        default_palette = QGuiApplication.palette()
-        color = QColor(
+    if _GUI:
+        default_palette = QtGui.QGuiApplication.palette()
+        color = QtGui.QColor(
             *[int(theme["primaryColor"][i : i + 2], 16) for i in range(1, 6, 2)]
             + [92]
         )
 
-        if FEATURE:
-            default_palette.set_color(QPalette.ColorRole.Text, color)
-            QGuiApplication.set_palette(default_palette)
-            if hasattr(QPalette, "PlaceholderText"):  # pyside6
-                default_palette.set_color(QPalette.PlaceholderText, color)
+        if _FEATURE:
+            default_palette.set_color(QtGui.QPalette.ColorRole.Text, color)
+            QtGui.QGuiApplication.set_palette(default_palette)
+            if hasattr(QtGui.QPalette, "PlaceholderText"):  # pyside6
+                default_palette.set_color(QtGui.QPalette.PlaceholderText, color)
         else:
-            default_palette.setColor(QPalette.ColorRole.Text, color)
-            QGuiApplication.setPalette(default_palette)
-            if hasattr(QPalette, "PlaceholderText"):  # pyside6
-                default_palette.setColor(QPalette.PlaceholderText, color)
+            default_palette.setColor(QtGui.QPalette.ColorRole.Text, color)
+            QtGui.QGuiApplication.setPalette(default_palette)
+            if hasattr(QtGui.QPalette, "PlaceholderText"):  # pyside6
+                default_palette.setColor(QtGui.QPalette.PlaceholderText, color)
 
     environ = {
         "linux": platform.system() == "Linux",
@@ -246,12 +245,12 @@ def add_fonts():
             lambda s: s.endswith(".ttf"),
             os.listdir(os.path.join(fonts_path, font_dir)),
         ):
-            if FEATURE:
-                QFontDatabase.add_application_font(
+            if _FEATURE:
+                QtGui.QFontDatabase.add_application_font(
                     os.path.join(fonts_path, font_dir, font)
                 )
             else:
-                QFontDatabase.addApplicationFont(
+                QtGui.QFontDatabase.addApplicationFont(
                     os.path.join(fonts_path, font_dir, font)
                 )
 
@@ -271,11 +270,12 @@ def apply_stylesheet(
         extra = {}
     if style:
         try:
-            if FEATURE:
+            if _FEATURE:
                 app.style = style
             else:
                 app.setStyle(style)
-        except:
+        except Exception as e:
+            logging.debug(e)
             logging.error(f"The style '{style}' does not exist.")
             pass
 
@@ -296,7 +296,7 @@ def apply_stylesheet(
         with open(css_file) as file:
             stylesheet += file.read().format(**os.environ)
 
-    if FEATURE:
+    if _FEATURE:
         app.style_sheet = stylesheet
     else:
         app.setStyleSheet(stylesheet)
@@ -345,18 +345,18 @@ def set_icons_theme(theme, parent="theme"):
     )
     resources.generate()
 
-    if GUI:
-        if FEATURE:
+    if _GUI:
+        if _FEATURE:
             # noinspection PyUnresolvedReferences
-            QDir.add_search_path("icon", resources.index)
+            QtCore.QDir.add_search_path("icon", resources.index)
             # noinspection PyUnresolvedReferences
-            QDir.add_search_path(
+            QtCore.QDir.add_search_path(
                 "qt_material",
                 os.path.join(os.path.dirname(__file__), "resources"),
             )
         else:
-            QDir.addSearchPath("icon", resources.index)
-            QDir.addSearchPath(
+            QtCore.QDir.addSearchPath("icon", resources.index)
+            QtCore.QDir.addSearchPath(
                 "qt_material",
                 os.path.join(os.path.dirname(__file__), "resources"),
             )
@@ -374,3 +374,21 @@ def list_themes():
 def get_hook_dirs():
     package_folder = Path(__file__).parent
     return [str(package_folder.absolute())]
+
+
+__all__ = [
+    add_fonts,
+    apply_stylesheet,
+    build_stylesheet,
+    density,
+    export_theme,
+    get_hook_dirs,
+    get_theme,
+    list_themes,
+    opacity,
+    QtCore,
+    QtGui,
+    QtStyleTools,
+    QtWidgets,
+    set_icons_theme,
+]

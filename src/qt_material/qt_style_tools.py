@@ -1,13 +1,20 @@
 import os
 import sys
+from warnings import deprecated
 
-from PyQt6 import uic
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QAction, QActionGroup, QColor
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QColorDialog
+if "PySide6" in sys.modules:
+    from PySide6 import QtUiTools
+elif "PyQt6" in sys.modules:
+    from PyQt6 import uic
 
-from src.qt_material import FEATURE, apply_stylesheet, deprecated, list_themes
+from ..qt_material import (
+    _FEATURE,
+    QtCore,
+    QtGui,
+    QtWidgets,
+    apply_stylesheet,
+    list_themes,
+)
 
 
 class QtStyleTools:
@@ -15,31 +22,28 @@ class QtStyleTools:
 
     extra_values = {}
 
-    # ----------------------------------------------------------------------
     @deprecated("set_extra")
     def set_extra_colors(self, extra):
         """"""
         self.extra_values = extra
 
-    # ----------------------------------------------------------------------
     def set_extra(self, extra):
         """"""
         self.extra_values = extra
 
-    # ----------------------------------------------------------------------
     def add_menu_theme(self, parent, menu):
         """"""
         self.menu_theme_ = menu
-        action_group = QActionGroup(menu)
-        if FEATURE:
+        action_group = QtGui.QActionGroup(menu)
+        if _FEATURE:
             action_group.exclusive = True
         else:
             action_group.setExclusive(True)
 
         for i, theme in enumerate(["default"] + list_themes()):
-            action = QAction(parent)
+            action = QtGui.QAction(parent)
             action.triggered.connect(lambda: self.update_theme_event(parent))
-            if FEATURE:
+            if _FEATURE:
                 action.text = theme
                 action.checkable = True
                 action.checked = not bool(i)
@@ -54,16 +58,15 @@ class QtStyleTools:
                 menu.addAction(action)
                 action_group.addAction(action)
 
-    # ----------------------------------------------------------------------
     def add_menu_density(self, parent, menu):
         """"""
         self.menu_density_ = menu
-        action_group = QActionGroup(menu)
+        action_group = QtGui.QActionGroup(menu)
 
-        if FEATURE:
+        if _FEATURE:
             action_group.exclusive = True
             for density in map(str, range(-3, 4)):
-                action = QAction(parent)
+                action = QtGui.QAction(parent)
                 action.triggered.connect(
                     lambda: self.update_theme_event(parent)
                 )
@@ -76,7 +79,7 @@ class QtStyleTools:
         else:
             action_group.setExclusive(True)
             for density in map(str, range(-3, 4)):
-                action = QAction(parent)
+                action = QtGui.QAction(parent)
                 action.triggered.connect(
                     lambda: self.update_theme_event(parent)
                 )
@@ -92,7 +95,7 @@ class QtStyleTools:
     ):
         """"""
         if theme == "default":
-            if FEATURE:
+            if _FEATURE:
                 parent.style_sheet = ""
             else:
                 parent.setStyleSheet("")
@@ -110,10 +113,9 @@ class QtStyleTools:
         if callable_:
             callable_()
 
-    # ----------------------------------------------------------------------
     def update_theme_event(self, parent):
         """"""
-        if FEATURE:
+        if _FEATURE:
             density = [
                 action.text
                 for action in self.menu_density_.actions()
@@ -146,7 +148,6 @@ class QtStyleTools:
             callable_=self.update_buttons,
         )
 
-    # ----------------------------------------------------------------------
     def update_buttons(self):
         """"""
         if not hasattr(self, "colors"):
@@ -157,7 +158,7 @@ class QtStyleTools:
             for color_ in self.colors
         }
 
-        if FEATURE:
+        if _FEATURE:
             if "light" in os.environ["QTMATERIAL_THEME"]:
                 # noinspection PyUnresolvedReferences
                 self.dock_theme.checkBox_light_theme.checked = True
@@ -172,7 +173,7 @@ class QtStyleTools:
                 # noinspection PyUnresolvedReferences
                 self.dock_theme.checkBox_light_theme.setChecked(False)
 
-        if FEATURE:
+        if _FEATURE:
             # noinspection PyUnresolvedReferences
             if self.dock_theme.checkBox_light_theme.checked:
                 (
@@ -200,9 +201,9 @@ class QtStyleTools:
 
             text_color = "#000000"
             # noinspection PyUnresolvedReferences
-            if FEATURE and self.get_color(color).get_hsv()[2] < 128:
+            if _FEATURE and self.get_color(color).get_hsv()[2] < 128:
                 text_color = "#ffffff"
-            elif not FEATURE and self.get_color(color).getHsv()[2] < 128:
+            elif not _FEATURE and self.get_color(color).getHsv()[2] < 128:
                 text_color = "#ffffff"
 
             button.setStyleSheet(
@@ -216,12 +217,12 @@ class QtStyleTools:
 
             self.custom_colors[color_] = color
 
-    # ----------------------------------------------------------------------
     def get_color(self, color):
         """"""
-        return QColor(*[int(color[s : s + 2], 16) for s in range(1, 6, 2)])
+        return QtGui.QColor(
+            *[int(color[s : s + 2], 16) for s in range(1, 6, 2)]
+        )
 
-    # ----------------------------------------------------------------------
     def update_theme(self, parent):
         """"""
         with open("my_theme.xml", "w") as file:
@@ -238,7 +239,7 @@ class QtStyleTools:
               </resources>
             """.format(**self.custom_colors)
             )
-        if FEATURE:
+        if _FEATURE:
             # noinspection PyUnresolvedReferences
             light = self.dock_theme.checkBox_light_theme.checked
         else:
@@ -253,20 +254,19 @@ class QtStyleTools:
             callable_=self.update_buttons,
         )
 
-    # ----------------------------------------------------------------------
     def set_color(self, parent, button_):
         """"""
 
         def iner():
             initial = self.get_color(self.custom_colors[button_])
-            color_dialog = QColorDialog(parent=parent)
-            if FEATURE:
+            color_dialog = QtWidgets.QColorDialog(parent=parent)
+            if _FEATURE:
                 color_dialog.current_color = initial
             else:
                 color_dialog.setCurrentColor(initial)
             done = color_dialog.exec_()
 
-            if FEATURE:
+            if _FEATURE:
                 color_ = color_dialog.current_color
                 if done and color_.is_valid():
                     rgb_255 = [color_.red(), color_.green(), color_.blue()]
@@ -287,7 +287,6 @@ class QtStyleTools:
 
         return iner
 
-    # ----------------------------------------------------------------------
     def show_dock_theme(self, parent):
         """"""
         self.colors = [
@@ -306,7 +305,7 @@ class QtStyleTools:
         }
 
         if "PySide6" in sys.modules:
-            self.dock_theme = QUiLoader().load(
+            self.dock_theme = QtUiTools.QUiLoader().load(
                 os.path.join(os.path.dirname(__file__), "dock_theme.ui")
             )
         elif "PyQt6" in sys.modules:
@@ -314,14 +313,14 @@ class QtStyleTools:
                 os.path.join(os.path.dirname(__file__), "dock_theme.ui")
             )
 
-        if FEATURE:
+        if _FEATURE:
             parent.add_dock_widget(
-                Qt.DockWidgetArea.LeftDockWidgetArea, self.dock_theme
+                QtGui.Qt.DockWidgetArea.LeftDockWidgetArea, self.dock_theme
             )
             self.dock_theme.floating = True
         else:
             parent.addDockWidget(
-                Qt.DockWidgetArea.LeftDockWidgetArea, self.dock_theme
+                QtCore.Qt.DockWidgetArea.LeftDockWidgetArea, self.dock_theme
             )
             self.dock_theme.setFloating(True)
 
