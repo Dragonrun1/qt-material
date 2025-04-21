@@ -30,8 +30,8 @@ pyside = [
     "pyside6>=6.9.0",
 ]
 docs = [
-    "ipykernel>=5.5.6",
-    "ipython==7.16.3",
+    "ipykernel>=6.29.5",
+    "ipython>=9.1.0",
     "nbsphinx>=0.9.7",
     "pygments>=2.19.1",
 ]
