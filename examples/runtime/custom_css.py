@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
-from qt_material import apply_stylesheet
-import os
+from src.qt_material import apply_stylesheet
 
 
 ########################################################################
@@ -10,8 +9,8 @@ class RuntimeStylesheets(QMainWindow):
     def __init__(self):
         """"""
         super().__init__()
-        self.main = QUiLoader().load('main_window.ui', self)
-        self.main.pushButton_2.setProperty('class', 'big_button')
+        self.main = QUiLoader().load("main_window.ui", self)
+        self.main.pushButton_2.setProperty("class", "big_button")
 
 
 if __name__ == "__main__":
@@ -24,7 +23,7 @@ if __name__ == "__main__":
     # with open('custom.css') as file:
     # app.setStyleSheet(stylesheet + file.read().format(**os.environ))
 
-    apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
+    apply_stylesheet(app, theme="light_blue.xml", css_file="custom.css")
 
     frame = RuntimeStylesheets()
     frame.main.show()

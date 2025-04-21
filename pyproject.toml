@@ -41,6 +41,13 @@ dependencies = [
 dev = [
     "ruff>=0.11.6",
 ]
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.lint]
+extend-select = ["E", "I", "N", "R", "W"]
+
 [urls]
 Homepage = "https://github.com/Dragonrun1/qt-material"
 Repository = "https://github.com/Dragonrun1/qt-material.git"

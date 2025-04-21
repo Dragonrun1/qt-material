@@ -3,34 +3,33 @@ import sys
 import logging
 from multiprocessing import freeze_support
 
-if '--pyside2' in sys.argv:
+if "--pyside2" in sys.argv:
     from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
     from PySide2.QtCore import QTimer, Qt, QCoreApplication
     from PySide2.QtGui import QIcon
     from PySide2.QtUiTools import QUiLoader
 
-elif '--pyside6' in sys.argv:
+elif "--pyside6" in sys.argv:
     from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
     from PySide6.QtCore import QTimer, Qt, QCoreApplication
-    from PySide6.QtGui import QIcon, QPixmap
+    from PySide6.QtGui import QIcon
     from PySide6.QtUiTools import QUiLoader
-    from __feature__ import snake_case, true_property
 
-elif '--pyqt5' in sys.argv:
+elif "--pyqt5" in sys.argv:
     from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
     from PyQt5.QtCore import QTimer, Qt, QCoreApplication
-    from PyQt5 import uic, QtWebEngineWidgets
+    from PyQt5 import uic
     from PyQt5.QtGui import QIcon
 
-elif '--pyqt6' in sys.argv:
+elif "--pyqt6" in sys.argv:
     from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
     from PyQt6.QtCore import QTimer, Qt, QCoreApplication
     from PyQt6.QtGui import QIcon
-    from PyQt6 import uic, QtWebEngineWidgets
+    from PyQt6 import uic
 
-from qt_material import apply_stylesheet, QtStyleTools, density
+from src.qt_material import apply_stylesheet, QtStyleTools
 
-if hasattr(Qt, 'AA_ShareOpenGLContexts'):
+if hasattr(Qt, "AA_ShareOpenGLContexts"):
     try:
         QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
     except:
@@ -53,15 +52,15 @@ except:
 # Extra stylesheets
 extra = {
     # Button colors
-    'danger': '#dc3545',
-    'warning': '#ffc107',
-    'success': '#17a2b8',
+    "danger": "#dc3545",
+    "warning": "#ffc107",
+    "success": "#17a2b8",
     # Font
-    'font_family': 'Roboto',
+    "font_family": "Roboto",
     # Density
-    'density_scale': '0',
+    "density_scale": "0",
     # Button Shape
-    'button_shape': 'default',
+    "button_shape": "default",
 }
 
 # extra['QMenu'] = {
@@ -77,32 +76,30 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
         """Constructor"""
         super().__init__()
 
-        if '--pyside2' in sys.argv:
-            self.main = QUiLoader().load('main_window.ui', self)
-            wt = 'PySide2'
+        if "--pyside2" in sys.argv:
+            self.main = QUiLoader().load("main_window.ui", self)
+            wt = "PySide2"
 
-        elif '--pyside6' in sys.argv:
-            self.main = QUiLoader().load('main_window.ui', self)
-            wt = 'PySide6'
+        elif "--pyside6" in sys.argv:
+            self.main = QUiLoader().load("main_window.ui", self)
+            wt = "PySide6"
 
-        elif '--pyqt5' in sys.argv:
-            self.main = uic.loadUi('main_window.ui', self)
-            wt = 'PyQt5'
+        elif "--pyqt5" in sys.argv:
+            self.main = uic.loadUi("main_window.ui", self)
+            wt = "PyQt5"
 
-        elif '--pyqt6' in sys.argv:
-            self.main = uic.loadUi('main_window.ui', self)
-            wt = 'PyQt6'
+        elif "--pyqt6" in sys.argv:
+            self.main = uic.loadUi("main_window.ui", self)
+            wt = "PyQt6"
 
         else:
-            logging.error(
-                'must include --pyside2, --pyside6 or --pyqt5 in args!'
-            )
+            logging.error("must include --pyside2, --pyside6 or --pyqt5 in args!")
             sys.exit()
 
         try:
-            self.main.setWindowTitle(f'{self.main.windowTitle()} - {wt}')
+            self.main.setWindowTitle(f"{self.main.windowTitle()} - {wt}")
         except:
-            self.main.window_title = f'{self.main.window_title} - {wt}'
+            self.main.window_title = f"{self.main.window_title} - {wt}"
 
         self.custom_styles()
 
@@ -125,11 +122,11 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
             self.main.window_icon = logo
             self.main.actionToolbar.icon = logo
             [
-                setattr(self.main.listWidget_2.item(i), 'icon', logo_frame)
+                setattr(self.main.listWidget_2.item(i), "icon", logo_frame)
                 for i in range(self.main.listWidget_2.count)
             ]
 
-        if hasattr(QFileDialog, 'getExistingDirectory'):
+        if hasattr(QFileDialog, "getExistingDirectory"):
             self.main.pushButton_file_dialog.clicked.connect(
                 lambda: QFileDialog.getOpenFileName(self.main)
             )
@@ -148,17 +145,12 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
     def custom_styles(self):
         """"""
         for i in range(self.main.toolBar_vertical.layout().count()):
-
             try:
-                tool_button = (
-                    self.main.toolBar_vertical.layout().itemAt(i).widget()
-                )
+                tool_button = self.main.toolBar_vertical.layout().itemAt(i).widget()
                 tool_button.setMaximumWidth(150)
                 tool_button.setMinimumWidth(150)
             except:
-                tool_button = (
-                    self.main.toolBar_vertical.layout().item_at(i).widget()
-                )
+                tool_button = self.main.toolBar_vertical.layout().item_at(i).widget()
                 tool_button.maximum_width = 150
                 tool_button.minimum_width = 150
         try:
@@ -179,12 +171,11 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
 T0 = 1000
 
 if __name__ == "__main__":
-
     # ----------------------------------------------------------------------
     def take_screenshot():
         pixmap = frame.main.grab()
-        pixmap.save(os.path.join('screenshots', f'{theme}.png'))
-        print(f'Saving {theme}')
+        pixmap.save(os.path.join("screenshots", f"{theme}.png"))
+        print(f"Saving {theme}")
 
     if len(sys.argv) > 2:
         theme = sys.argv[2]
@@ -195,13 +186,13 @@ if __name__ == "__main__":
             QTimer.single_shot(T0, take_screenshot)
             QTimer.single_shot(T0 * 2, app.closeAllWindows)
     else:
-        theme = 'default'
+        theme = "default"
 
     # Set theme on in itialization
     apply_stylesheet(
         app,
-        theme + '.xml',
-        invert_secondary=('light' in theme and 'dark' not in theme),
+        theme + ".xml",
+        invert_secondary=("light" in theme and "dark" not in theme),
         extra=extra,
     )
 
@@ -211,7 +202,7 @@ if __name__ == "__main__":
     except:
         frame.main.show_maximized()
 
-    if hasattr(app, 'exec'):
+    if hasattr(app, "exec"):
         app.exec()
     else:
         app.exec_()

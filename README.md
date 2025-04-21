@@ -43,13 +43,12 @@ pip install qt-material
 
 ## Usage
 
-
 ```python
 import sys
 from PySide6 import QtWidgets
 # from PySide2 import QtWidgets
 # from PyQt5 import QtWidgets
-from qt_material import apply_stylesheet
+from src.qt_material import apply_stylesheet
 
 # create the application and the main window
 app = QtWidgets.QApplication(sys.argv)
@@ -65,9 +64,8 @@ app.exec_()
 
 ## Themes
 
-
 ```python
-from qt_material import list_themes
+from src.qt_material import list_themes
 
 list_themes()
 ```
@@ -300,39 +298,33 @@ A full set of examples are available in the [exmaples directory](https://github.
 
 This feature able to use ```qt-material``` themes into ```Qt``` implementations using only local files.
 
-
 ```python
-from qt_material import export_theme
+from src.qt_material import export_theme
 
 extra = {
 
     # Button colors
-    'danger': '#dc3545',
-    'warning': '#ffc107',
-    'success': '#17a2b8',
+    'danger': '#dc3545', 'warning': '#ffc107', 'success': '#17a2b8',
 
     # Font
-    'font_family': 'monoespace',
-    'font_size': '13px',
-    'line_height': '13px',
+    'font_family': 'monoespace', 'font_size': '13px', 'line_height': '13px',
 
     # Density Scale
     'density_scale': '0',
 
     # environ
-    'pyside6': True,
-    'linux': True,
+    'pyside6': True, 'linux': True,
 
 }
 
-export_theme(theme='dark_teal.xml', 
-             qss='dark_teal.qss', 
-             rcc='resources.rcc',
-             output='theme', 
-             prefix='icon:/', 
-             invert_secondary=False, 
-             extra=extra,
-            )
+export_theme(
+    theme='dark_teal.xml',
+    qss='dark_teal.qss',
+    rcc='resources.rcc',
+    output='theme',
+    prefix='icon:/',
+    invert_secondary=False,
+    extra=extra, )
 ```
 
 This script will generate both ```dark_teal.qss``` and ```resources.rcc``` and a folder with all theme icons called ```theme```.
