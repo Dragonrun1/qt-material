@@ -1,6 +1,7 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
-from src.qt_material import QtStyleTools
+from PySide6.QtWidgets import QApplication, QMainWindow
+
+from src.qt_material.qt_style_tools import QtStyleTools
 
 
 ########################################################################

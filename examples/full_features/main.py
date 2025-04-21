@@ -1,33 +1,34 @@
+import logging
 import os
 import sys
-import logging
 from multiprocessing import freeze_support
 
 if "--pyside2" in sys.argv:
-    from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
-    from PySide2.QtCore import QTimer, Qt, QCoreApplication
+    from PySide2.QtCore import QCoreApplication, Qt, QTimer
     from PySide2.QtGui import QIcon
     from PySide2.QtUiTools import QUiLoader
+    from PySide2.QtWidgets import QApplication, QFileDialog, QMainWindow
 
 elif "--pyside6" in sys.argv:
-    from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
-    from PySide6.QtCore import QTimer, Qt, QCoreApplication
+    from PySide6.QtCore import QCoreApplication, Qt, QTimer
     from PySide6.QtGui import QIcon
     from PySide6.QtUiTools import QUiLoader
+    from PySide6.QtWidgets import QApplication, QFileDialog, QMainWindow
 
 elif "--pyqt5" in sys.argv:
-    from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
-    from PyQt5.QtCore import QTimer, Qt, QCoreApplication
     from PyQt5 import uic
+    from PyQt5.QtCore import QCoreApplication, Qt, QTimer
     from PyQt5.QtGui import QIcon
+    from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 
 elif "--pyqt6" in sys.argv:
-    from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
-    from PyQt6.QtCore import QTimer, Qt, QCoreApplication
-    from PyQt6.QtGui import QIcon
     from PyQt6 import uic
+    from PyQt6.QtCore import QCoreApplication, Qt, QTimer
+    from PyQt6.QtGui import QIcon
+    from PyQt6.QtWidgets import QApplication, QFileDialog, QMainWindow
 
-from src.qt_material import apply_stylesheet, QtStyleTools
+from src.qt_material import apply_stylesheet
+from src.qt_material.qt_style_tools import QtStyleTools
 
 if hasattr(Qt, "AA_ShareOpenGLContexts"):
     try:
@@ -93,7 +94,9 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
             wt = "PyQt6"
 
         else:
-            logging.error("must include --pyside2, --pyside6 or --pyqt5 in args!")
+            logging.error(
+                "must include --pyside2, --pyside6 or --pyqt5 in args!"
+            )
             sys.exit()
 
         try:
@@ -146,11 +149,15 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
         """"""
         for i in range(self.main.toolBar_vertical.layout().count()):
             try:
-                tool_button = self.main.toolBar_vertical.layout().itemAt(i).widget()
+                tool_button = (
+                    self.main.toolBar_vertical.layout().itemAt(i).widget()
+                )
                 tool_button.setMaximumWidth(150)
                 tool_button.setMinimumWidth(150)
             except:
-                tool_button = self.main.toolBar_vertical.layout().item_at(i).widget()
+                tool_button = (
+                    self.main.toolBar_vertical.layout().item_at(i).widget()
+                )
                 tool_button.maximum_width = 150
                 tool_button.minimum_width = 150
         try:
