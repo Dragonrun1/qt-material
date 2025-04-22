@@ -1,20 +1,20 @@
-# Qt-Material
+# Qt-Material6
 
-This is another stylesheet for **PySide6** and **PyQt6**, which looks like Material Design (close enough).
+This is another style sheet for **PySide6** and **PyQt6**, which looks like Material Design (close enough).
 
-![GitHub top language](https://img.shields.io/github/languages/top/Dragonrun1/qt-material)
-![PyPI - License](https://img.shields.io/pypi/l/qt-material)
-![PyPI](https://img.shields.io/pypi/v/qt-material)
-![PyPI - Status](https://img.shields.io/pypi/status/qt-material)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/qt-material)
-![GitHub last commit](https://img.shields.io/github/last-commit/Dragonrun1/qt-material)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/Dragonrun1/qt-material)
-[![Documentation Status](https://readthedocs.org/projects/qt-material/badge/?version=latest)](https://qt-material.readthedocs.io/en/latest/?badge=latest)
+![GitHub top language](https://img.shields.io/github/languages/top/Dragonrun1/qt-material6)
+![PyPI - License](https://img.shields.io/pypi/l/qt-material6)
+![PyPI](https://img.shields.io/pypi/v/qt-material6)
+![PyPI - Status](https://img.shields.io/pypi/status/qt-material6)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/qt-material6)
+![GitHub last commit](https://img.shields.io/github/last-commit/Dragonrun1/qt-material6)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/Dragonrun1/qt-material6)
+[![Documentation Status](https://readthedocs.org/projects/qt-material6/badge/?version=latest)](https://qt-material6.readthedocs.io/en/latest/?badge=latest)
 
 There is some custom dark themes:
-![dark](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/dark.gif)
+![dark](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagesdark.gif)
 And light:
-![light](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/light.gif)
+![light](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imageslight.gif)
 
 ## Navigation
 
@@ -38,7 +38,7 @@ And light:
 
 
 ```python
-pip install qt-material
+pip install qt-material6
 ```
 
 ## Usage
@@ -48,7 +48,7 @@ pip install qt-material
 import sys
 from PySide6 import QtWidgets
 # from PyQt6 import QtWidgets
-from qt_material import apply_stylesheet
+from qt_material6 import apply_stylesheet
 
 # create the application and the main window
 app = QtWidgets.QApplication(sys.argv)
@@ -66,12 +66,12 @@ app.exec_()
 
 
 ```python
-from qt_material import list_themes
+from qt_material6 import list_themes
 
 list_themes()
 ```
 
-    WARNING:root:qt_material must be imported after PySide6 or PyQt6!
+    WARNING:root:qt_material6 must be imported after PySide6 or PyQt6!
 
 
 
@@ -134,7 +134,7 @@ apply_stylesheet(app, theme='light_red.xml', invert_secondary=True)
 
 ## Environ variables
 
-There is a environ variables related to the current theme used, these variables are for **consult purpose only**.
+There are environ variables related to the current theme used, these variables are for **consult purpose only**.
 
 
 | Environ variable               | Description                              | Example        |
@@ -177,7 +177,7 @@ pushButton_warning.setProperty('class', 'warning')
 pushButton_success.setProperty('class', 'success')
 ```
 
-![extra](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/extra.png)
+![extra](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagesextra.png)
 
 ## Custom stylesheets
 
@@ -219,30 +219,30 @@ And the class style can be applied with the `setProperty` method:
 self.main.pushButton.setProperty('class', 'big_button')
 ```
 
-![extra](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/custom.png)
+![extra](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagescustom.png)
 
 ## Run examples
 A window with almost all widgets (see the previous screenshots) are available to test all themes and **create new ones**.
 
 
 ```python
-git clone https://github.com/UN-GCPDS/qt-material.git
-cd qt-material
+git clone https://github.com/Dragonrun1/qt-material6.git
+cd qt-material6
 python setup.py install
 cd examples/full_features
 python main.py --pyside6
 ```
 
-![theme](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/theme.gif)
+![theme](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagestheme.gif)
 
 ## New themes
 
-Do you have a custom theme? it looks good? create a [pull request](https://github.com/Dragonrun1/qt-material/pulls) in [themes folder](https://github.com/Dragonrun1/qt-material/tree/main/qt_material/themes>)  and share it with all users.
+Do you have a custom theme? it looks good? create a [pull request](https://github.com/Dragonrun1/qt-material6/pulls) in [themes folder](https://github.com/Dragonrun1/qt-material6/tree/main/qt_material/themes>)  and share it with all users.
 
 
 ## Change theme in runtime
 
-There is a `qt_material.QtStyleTools` class that must be inherited along to `QMainWindow` for change themes in runtime using the `apply_stylesheet()` method.
+There is a `qt_material6.QtStyleTools` class that must be inherited along to `QMainWindow` for change themes in runtime using the `apply_stylesheet()` method.
 
 
 ```python
@@ -257,7 +257,7 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
         # self.apply_stylesheet(self.main, 'light_blue.xml')
 ```
 
-![run](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/runtime.gif)
+![run](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagesruntime.gif)
 
 ### Integrate stylesheets in a menu
 
@@ -274,7 +274,7 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
         self.add_menu_theme(self.main, self.main.menuStyles)
 ```
 
-![menu](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/runtime_menu.gif)
+![menu](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagesruntime_menu.gif)
 
 ## Create new themes
 
@@ -291,17 +291,17 @@ class RuntimeStylesheets(QMainWindow, QtStyleTools):
         self.show_dock_theme(self.main)
 ```
 
-![dock](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/runtime_dock.gif)
+![dock](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagesruntime_dock.gif)
 
-A full set of examples are available in the [examples directory](https://github.com/Dragonrun1/qt-material/blob/master/examples/runtime/)
+A full set of examples are available in the [examples directory](https://github.com/Dragonrun1/qt-material6/blob/master/examples/runtime/)
 
 ## Export theme
 
-This feature able to use ```qt-material``` themes into ```Qt``` implementations using only local files.
+This feature able to use ```qt-material6``` themes into ```Qt``` implementations using only local files.
 
 
 ```python
-from qt_material import export_theme
+from qt_material6 import export_theme
 
 extra = {
 
@@ -381,7 +381,7 @@ extra = {
 apply_stylesheet(app, 'default', invert_secondary=False, extra=extra)
 ```
 
-![dock](https://github.com/UN-GCPDS/qt-material/raw/master/docs/source/notebooks/_images/density/density.gif)
+![dock](https://github.com/Dragonrun1/qt-material6/tree/raw/main/docs/source/notebooks/_imagesdensity/density.gif)
 
 ## Troubleshoots
 
