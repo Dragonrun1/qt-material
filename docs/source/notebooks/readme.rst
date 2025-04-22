@@ -1,22 +1,22 @@
-Qt-Material
-===========
+Qt-Material6
+============
 
-This is another stylesheet for **PySide6** and **PyQt6**, which looks
+This is another style sheet for **PySide6** and **PyQt6**, which looks
 like Material Design (close enough).
 
 |GitHub top language| |PyPI - License| |PyPI| |PyPI - Status| |PyPI -
 Python Version| |GitHub last commit| |CodeFactor Grade| |Documentation
 Status|
 
-.. |GitHub top language| image:: https://img.shields.io/github/languages/top/Dragonrun1/qt-material
-.. |PyPI - License| image:: https://img.shields.io/pypi/l/qt-material
-.. |PyPI| image:: https://img.shields.io/pypi/v/qt-material
-.. |PyPI - Status| image:: https://img.shields.io/pypi/status/qt-material
-.. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/qt-material
-.. |GitHub last commit| image:: https://img.shields.io/github/last-commit/Dragonrun1/qt-material
-.. |CodeFactor Grade| image:: https://img.shields.io/codefactor/grade/github/Dragonrun1/qt-material
-.. |Documentation Status| image:: https://readthedocs.org/projects/qt-material/badge/?version=latest
-   :target: https://qt-material.readthedocs.io/en/latest/?badge=latest
+.. |GitHub top language| image:: https://img.shields.io/github/languages/top/Dragonrun1/qt-material6
+.. |PyPI - License| image:: https://img.shields.io/pypi/l/qt-material6
+.. |PyPI| image:: https://img.shields.io/pypi/v/qt-material6
+.. |PyPI - Status| image:: https://img.shields.io/pypi/status/qt-material6
+.. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/qt-material6
+.. |GitHub last commit| image:: https://img.shields.io/github/last-commit/Dragonrun1/qt-material6
+.. |CodeFactor Grade| image:: https://img.shields.io/codefactor/grade/github/Dragonrun1/qt-material6
+.. |Documentation Status| image:: https://readthedocs.org/projects/qt-material6/badge/?version=latest
+   :target: https://qt-material6.readthedocs.io/en/latest/?badge=latest
 
 There is some custom dark themes: |dark| And light: |light|
 
@@ -48,7 +48,7 @@ Install
 
 .. code:: ipython3
 
-    pip install qt-material
+    pip install qt-material6
 
 Usage
 -----
@@ -58,7 +58,7 @@ Usage
     import sys
     from PySide6 import QtWidgets
     # from PyQt6 import QtWidgets
-    from qt_material import apply_stylesheet
+    from qt_material6 import apply_stylesheet
     
     # create the application and the main window
     app = QtWidgets.QApplication(sys.argv)
@@ -76,14 +76,14 @@ Themes
 
 .. code:: ipython3
 
-    from qt_material import list_themes
+    from qt_material6 import list_themes
     
     list_themes()
 
 
 .. parsed-literal::
 
-    WARNING:root:qt_material must be imported after PySide6 or PyQt6!
+    WARNING:root:qt_material6 must be imported after PySide6 or PyQt6!
 
 
 
@@ -151,7 +151,7 @@ Light themes will need to add ``invert_secondary`` argument as ``True``.
 Environ variables
 -----------------
 
-There is a environ variables related to the current theme used, these
+There are environ variables related to the current theme used, these
 variables are for **consult purpose only**.
 
 +------------------------+--------------------------------+-----------+
@@ -267,8 +267,8 @@ available to test all themes and **create new ones**.
 
 .. code:: ipython3
 
-    git clone https://github.com/UN-GCPDS/qt-material.git
-    cd qt-material
+    git clone https://github.com/Dragonrun1/qt-material6.git
+    cd qt-material6
     python setup.py install
     cd examples/full_features
     python main.py --pyside6
@@ -282,14 +282,14 @@ New themes
 ----------
 
 Do you have a custom theme? it looks good? create a `pull
-request <https://github.com/Dragonrun1/qt-material/pulls>`__ in `themes
-folder <https://github.com/Dragonrun1/qt-material/tree/main/qt_material/themes%3E>`__
+request <https://github.com/Dragonrun1/qt-material6/pulls>`__ in `themes
+folder <https://github.com/Dragonrun1/qt-material6/tree/main/qt_material/themes%3E>`__
 and share it with all users.
 
 Change theme in runtime
 -----------------------
 
-There is a ``qt_material.QtStyleTools`` class that must be inherited
+There is a ``qt_material6.QtStyleTools`` class that must be inherited
 along to ``QMainWindow`` for change themes in runtime using the
 ``apply_stylesheet()`` method.
 
@@ -354,17 +354,17 @@ the main directory as ``my_theme.xml``
    dock
 
 A full set of examples are available in the `examples
-directory <https://github.com/Dragonrun1/qt-material/blob/master/examples/runtime/>`__
+directory <https://github.com/Dragonrun1/qt-material6/blob/master/examples/runtime/>`__
 
 Export theme
 ------------
 
-This feature able to use ``qt-material`` themes into ``Qt``
+This feature able to use ``qt-material6`` themes into ``Qt``
 implementations using only local files.
 
 .. code:: ipython3
 
-    from qt_material import export_theme
+    from qt_material6 import export_theme
     
     extra = {
     

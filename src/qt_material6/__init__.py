@@ -16,6 +16,12 @@ if "PySide6" in sys.modules:
 
 elif "PyQt6" in sys.modules:
     from PyQt6 import QtCore, QtGui, QtWidgets
+elif "PySide2" in sys.modules:
+    _GUI = False
+    logging.error("qt_material6 has ended support for PySide2!")
+elif "PyQt5" in sys.modules:
+    _GUI = False
+    logging.error("qt_material6 has ended support for PyQt5!")
 else:
     _GUI = False
     logging.error("qt_material6 must be imported after PySide6 or PyQt6!")
